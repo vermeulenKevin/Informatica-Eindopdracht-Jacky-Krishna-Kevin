@@ -1,90 +1,46 @@
-#
-# BREAKOUT GAME 
-#
+import pygame
 
-import pygame, time
+# Constanten
+GRID_SIZE = 32  # Aantal cellen per rij en kolom
+CELL_SIZE = 20  # Grootte van elke cel in pixels
+SCREEN_SIZE = GRID_SIZE * CELL_SIZE
 
-#
-# definitions 
-#
+# Kleuren
+LIGHT_GREEN = (144, 238, 144)
+DARK_GREEN = (0, 100, 0)
+BLACK = (0, 0, 0)
 
-FPS = 30 # Frames Per Second
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
-BALL_WIDTH = 16
-BALL_HEIGHT = 16
-
-ball_x = 0
-ball_speed_x = 6
-
-#
-# init game
-#
-
+# Initialiseer Pygame
 pygame.init()
-font = pygame.font.SysFont('default', 64)
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
-fps_clock = pygame.time.Clock()
+screen = pygame.display.set_mode((SCREEN_SIZE, SCREEN_SIZE))
+pygame.display.set_caption("LEGO Minotaurus")
 
-#
-# read images
-#
+# Spelbord aanmaken (0 = leeg, 1 = buitenrand)
+board = [[0 for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 
-spritesheet = pygame.image.load('Breakout_Tile_Free.png').convert_alpha()   
+# Buitenste rand maken
+for x in range(GRID_SIZE):
+    for y in range(GRID_SIZE):
+        if x == 0 or y == 0 or x == GRID_SIZE - 1 or y == GRID_SIZE - 1:
+            board[y][x] = 1  # Buitenrand
 
-ball_img = pygame.Surface((64, 64), pygame.SRCALPHA)  
-ball_img.blit(spritesheet, (0, 0), (1403, 652, 64, 64))   
-ball_img = pygame.transform.scale(ball_img, (BALL_WIDTH, BALL_HEIGHT))  
+def draw_board():
+    screen.fill(LIGHT_GREEN)
+    for y in range(GRID_SIZE):
+        for x in range(GRID_SIZE):
+            rect = pygame.Rect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+            if board[y][x] == 1:
+                pygame.draw.rect(screen, DARK_GREEN, rect)  # Buitenrand
+            pygame.draw.rect(screen, BLACK, rect, 1)  # Rasterlijnen
 
-#
-# game loop
-#
-
-print('mygame is running')
+# Hoofdloop
 running = True
 while running:
-    #
-    # read events
-    # 
-    for event in pygame.event.get(): 
-        if event.type == pygame.QUIT:  
-            running = False 
-    keys = pygame.key.get_pressed() 
-            
-    # 
-    # move everything
-    #
-
-    # move ball
-    ball_x = ball_x + ball_speed_x
-
-    # bounce ball
-    if ball_x < 0 : 
-      ball_speed_x = abs(ball_speed_x) 
-    if ball_x + BALL_WIDTH > SCREEN_WIDTH: 
-      ball_speed_x = abs(ball_speed_x) * -1 
-
-    # 
-    # handle collisions
-    #
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
     
-    # 
-    # draw everything
-    #
+    draw_board()
+    pygame.display.flip()
 
-    # clear screen
-    screen.fill('black') 
-
-    # draw ball
-    screen.blit(ball_img, (ball_x, 0))
-    
-    # show screen
-    pygame.display.flip() 
-
-    # 
-    # wait until next frame
-    #
-
-    fps_clock.tick(FPS) # Sleep the remaining time of this frame
-
-print('mygame stopt running')
+pygame.quit()
