@@ -1,4 +1,5 @@
 import pygame
+import time
 
 pygame.init()
 
@@ -11,6 +12,9 @@ HEG = (4, 135, 4)
 BLUE = (0, 0, 200)
 RED = (210, 0, 0)
 YELLOW = (230, 230, 0)
+
+COOLDOWN = 0.5
+last_click_time = 0
 
 SCREENW, SCREENH = pygame.display.Info().current_w, pygame.display.Info().current_h
 print(f"Screen Width: {SCREENW}, Screen Height: {SCREENH}")
@@ -29,8 +33,8 @@ screen = pygame.display.set_mode((SCREENW, SCREENH), pygame.NOFRAME | pygame.FUL
 
 layout = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 1],
-    [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1],
+    [1, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1],
+    [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
     [1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1],
     [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1],
@@ -62,15 +66,34 @@ layout = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-
-gras_image = pygame.image.load("images/gras3.png")
+# alle images inladen en goed formaat geven
+gras_image = pygame.image.load("images/grastest.png")
 gras_image = pygame.transform.scale(gras_image, (CELLW, CELLH))
 
-heg_image = pygame.image.load("images/heg2.png")
+heg_image = pygame.image.load("images/hegtest.png")
 heg_image = pygame.transform.scale(heg_image, (CELLW, CELLH)) 
 
-muur_image = pygame.image.load("images/muur3.png")
+muur_image = pygame.image.load("images/muurtest.png")
 muur_image = pygame.transform.scale(muur_image, (CELLW, CELLH)) 
+
+midden_image = pygame.image.load("images/middentest.png")
+midden_image = pygame.transform.scale(midden_image, (CELLW, CELLH)) 
+
+blauw_image = pygame.image.load("images/blauwtest.png")
+blauw_image = pygame.transform.scale(blauw_image, (CELLW, CELLH)) 
+
+wit_image = pygame.image.load("images/wittest.png")
+wit_image = pygame.transform.scale(wit_image, (CELLW, CELLH)) 
+
+geel_image = pygame.image.load("images/geeltest.png")
+geel_image = pygame.transform.scale(geel_image, (CELLW, CELLH)) 
+
+rood_image = pygame.image.load("images/roodtest.png")
+rood_image = pygame.transform.scale(rood_image, (CELLW, CELLH)) 
+
+heldblauw_image = pygame.image.load("images/testheldblauw.png")
+heldblauw_image = pygame.transform.scale(heldblauw_image, (CELLW, CELLH)) 
+
 
 def draw_board():
     for row in range(len(layout)):
@@ -81,17 +104,6 @@ def draw_board():
 
             # Bepaal kleur op basis van de waarde in de matrix
             
-            if layout[row][col] == 3:
-                color = BLUE
-            elif layout[row][col] == 4:
-                color = RED
-            elif layout[row][col] == 5:
-                color = YELLOW
-            elif layout[row][col] == 6:
-                color = WHITE
-            #elif layout[row][col] == 7:
-                #color = MIDDEN
-
             # Teken de tegel
             #pygame.draw.rect(screen, color, (x, y, CELLW, CELLH))
 
@@ -104,9 +116,18 @@ def draw_board():
                 screen.blit (heg_image, (x,y))
             elif layout[row][col] == 2:
                 screen.blit (muur_image, (x,y))
-
-
-
+            elif layout[row][col] == 3:
+                screen.blit (blauw_image, (x,y))
+            elif layout[row][col] == 4:
+                screen.blit (rood_image, (x,y))
+            elif layout[row][col] == 5:
+                screen.blit (geel_image, (x,y))
+            elif layout[row][col] == 6:
+                screen.blit (wit_image, (x,y))
+            elif layout[row][col] == 7:
+                screen.blit (midden_image, (x,y))
+            elif layout[row][col] == 8:
+                screen.blit (heldblauw_image, (x, y))
 
 running = True
 while running:
@@ -116,10 +137,19 @@ while running:
 
     screen.fill(WHITE)
 
-
     draw_board()
 
     pygame.display.update()
+
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        current_time = time.time()
+        if current_time - last_click_time > COOLDOWN:
+            last_click_time = current_time
+
+            mouse_pos = pygame.mouse.get_pos()
+            cell_x = (mouse_pos[0] - 336) // CELLW  # Bereken de x-coördinaat in de grid
+            cell_y = mouse_pos[1] // CELLH  # Bereken de y-coördinaat in de grid  # Haal de muispositie op
+            print(f"Klik op tile positie: ({cell_x}, {cell_y})")  # Print de tile-coördinaten
 
 
 pygame.quit()
