@@ -21,8 +21,8 @@ print(f"Screen Width: {SCREENW}, Screen Height: {SCREENH}")
 
 #SCREENW = 800
 #SCREENH = 800
-BOARDW = 768
-BOARDH = 768
+BOARDW = SCREENH
+BOARDH = SCREENH
 CELLW = BOARDW // 32
 CELLH = BOARDH // 32
 
@@ -129,6 +129,31 @@ def draw_board():
             elif layout[row][col] == 8:
                 screen.blit (heldblauw_image, (x, y))
 
+def find_blue_heroes(layout):
+    blue_positions = []
+
+    for y in range(len(layout)):
+        for x in range(len(layout[y])):
+            if layout[y][x] == 8:
+                blue_positions.append((x, y))
+
+    return blue_positions
+
+def move_selected_hero(dx, dy):
+    global selected_hero
+    if selected_hero:
+        x, y = selected_hero
+        new_x, new_y = x + dx, y + dy
+
+        # Check of de nieuwe positie binnen het bord valt
+        if 0 <= new_x < BOARDW and 0 <= new_y < BOARDH:
+            layout[y][x] = 0
+            layout[new_y][new_x] = 8
+            selected_hero = (new_x, new_y)
+            print(f"Hero verplaatst naar: {new_x}, {new_y}")
+            stappen = stappen + 1
+
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -139,17 +164,36 @@ while running:
 
     draw_board()
 
-    pygame.display.update()
-
     if event.type == pygame.MOUSEBUTTONDOWN:
         current_time = time.time()
         if current_time - last_click_time > COOLDOWN:
             last_click_time = current_time
 
             mouse_pos = pygame.mouse.get_pos()
-            cell_x = (mouse_pos[0] - 336) // CELLW  # Bereken de x-coördinaat in de grid
-            cell_y = mouse_pos[1] // CELLH  # Bereken de y-coördinaat in de grid  # Haal de muispositie op
-            print(f"Klik op tile positie: ({cell_x}, {cell_y})")  # Print de tile-coördinaten
+            cell_x = (mouse_pos[0] - ((SCREENW - BOARDW) // 2)) // CELLW
+            cell_y = mouse_pos[1] // CELLH 
+            print(f"Klik op tile positie: ({cell_x}, {cell_y})")
 
+            blue_heroes = find_blue_heroes(layout)
+            print("Posities van de blauwe helden:", blue_heroes)  
 
+            if (cell_x, cell_y) in blue_heroes:
+                selected_hero = (cell_x, cell_y)
+                print(f"Blauwe hero geselecteerd op positie: {selected_hero}")
+                screen.blit (midden_image, (cell_x, cell_y))
+            else: 
+                selected_hero = None
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_a]:  # Als A is ingedrukt
+        move_selected_hero(-1, 0)
+    if keys[pygame.K_w]:
+        move_selected_hero(0, -1)
+    if keys[pygame.K_s]:
+        move_selected_hero(0, 1)
+    if keys[pygame.K_d]:
+        move_selected_hero(1, 0)
+    
+            
+    pygame.display.update()
 pygame.quit()
