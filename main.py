@@ -67,10 +67,10 @@ layout = [
 ]
 
 # alle images inladen en goed formaat geven
-gras_image = pygame.image.load("images/grastest.png")
+gras_image = pygame.image.load("images/grass2.png")
 gras_image = pygame.transform.scale(gras_image, (CELLW, CELLH))
 
-heg_image = pygame.image.load("images/hegtest.png")
+heg_image = pygame.image.load("images/hedge.png")
 heg_image = pygame.transform.scale(heg_image, (CELLW, CELLH)) 
 
 muur_image = pygame.image.load("images/muurtest.png")
@@ -151,8 +151,6 @@ def move_selected_hero(dx, dy):
             layout[new_y][new_x] = 8
             selected_hero = (new_x, new_y)
             print(f"Hero verplaatst naar: {new_x}, {new_y}")
-            stappen = stappen + 1
-
 
 running = True
 while running:
