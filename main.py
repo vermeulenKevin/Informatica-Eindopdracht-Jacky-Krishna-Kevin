@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 pygame.init()
 
@@ -192,6 +193,40 @@ while running:
     if keys[pygame.K_d]:
         move_selected_hero(1, 0)
     
-            
-    pygame.display.update()
+ # Spelers
+spelers = ["Blauw", "Geel","Rood","Wit"]
+beurt_index = 0  # Rood begint
+
+#if beurt_index == 0:
+
+# Weergave van wie aan de beurt is
+font = pygame.font.Font(None, 50)
+beurt_tekst = font.render(f"{spelers[beurt_index]} mag gooien", True, BLACK)
+
+#dobbelsteen
+dobbelsteen_worp = None
+def gooi_dobbelsteen():
+        return random.randint(1, 6)
+font = pygame.font.Font(None, 50)
+
+if dobbelsteen_worp is None:
+        text = font.render("Druk op spatie om te rollen", True, BLACK)
+for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                dobbelsteen_worp = gooi_dobbelsteen()  # Dobbelsteen gooien
+                    
+if dobbelsteen_worp is None:
+    text = font.render("Druk op spatie om te rollen", True, BLACK)
+
+for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and beurt_index == 0:  # Alleen als het beurt_index 0 is
+                dobbelsteen_worp = gooi_dobbelsteen()  # Dobbelsteen gooien
+                 
+pygame.display.update()
 pygame.quit()
