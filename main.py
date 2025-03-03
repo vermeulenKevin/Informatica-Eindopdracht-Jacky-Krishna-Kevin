@@ -34,8 +34,8 @@ screen = pygame.display.set_mode((SCREENW, SCREENH), pygame.NOFRAME | pygame.FUL
 
 layout = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1],
-    [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
+    [1, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1],
+    [1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
     [1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1],
     [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1],
@@ -47,8 +47,8 @@ layout = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
-    [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 6, 6, 8, 8, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 7, 7, 8, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 6, 6, 3, 3, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 7, 7, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 7, 7, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 4, 4, 5, 5, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
@@ -62,8 +62,8 @@ layout = [
     [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1],
     [1, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1],
-    [1, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 1],
+    [1, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 1],
+    [1, 11, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
@@ -80,20 +80,29 @@ muur_image = pygame.transform.scale(muur_image, (CELLW, CELLH))
 midden_image = pygame.image.load("images/middentest.png")
 midden_image = pygame.transform.scale(midden_image, (CELLW, CELLH)) 
 
-blauw_image = pygame.image.load("images/blauwtest.png")
+blauw_image = pygame.image.load("images/nieuwetegelblauw1.png")
 blauw_image = pygame.transform.scale(blauw_image, (CELLW, CELLH)) 
 
-wit_image = pygame.image.load("images/witvlaktest.png")
+wit_image = pygame.image.load("images/nieuwetegelwit.png")
 wit_image = pygame.transform.scale(wit_image, (CELLW, CELLH)) 
 
-geel_image = pygame.image.load("images/geelvlaktest2.png")
+geel_image = pygame.image.load("images/nieuwetegelgeel1.png")
 geel_image = pygame.transform.scale(geel_image, (CELLW, CELLH)) 
 
-rood_image = pygame.image.load("images/roodvlaktest.png")
+rood_image = pygame.image.load("images/nieuwetegelrood.png")
 rood_image = pygame.transform.scale(rood_image, (CELLW, CELLH)) 
 
-heldblauw_image = pygame.image.load("images/blauwvlaktest.png")
+heldblauw_image = pygame.image.load("images/blauwepion.png")
 heldblauw_image = pygame.transform.scale(heldblauw_image, (CELLW, CELLH)) 
+
+heldwit_image = pygame.image.load("images/wittepion.png")
+heldwit_image = pygame.transform.scale(heldwit_image, (CELLW, CELLH)) 
+
+heldgeel_image = pygame.image.load("images/gelepion.png")
+heldgeel_image = pygame.transform.scale(heldgeel_image, (CELLW, CELLH)) 
+
+heldrood_image = pygame.image.load("images/rodepion1.png")
+heldrood_image = pygame.transform.scale(heldrood_image, (CELLW, CELLH)) 
 
 
 def draw_board():
@@ -129,7 +138,12 @@ def draw_board():
                 screen.blit (midden_image, (x,y))
             elif layout[row][col] == 8:
                 screen.blit (heldblauw_image, (x, y))
-
+            elif layout[row][col] == 9:
+                screen.blit (heldwit_image, (x, y))
+            elif layout[row][col] == 10:
+                screen.blit (heldgeel_image, (x, y))
+            elif layout[row][col] == 11:
+                screen.blit (heldrood_image, (x, y))
 def find_blue_heroes(layout):
     blue_positions = []
 
