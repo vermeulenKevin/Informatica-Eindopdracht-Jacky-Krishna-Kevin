@@ -18,6 +18,7 @@ COOLDOWN = 0.5
 last_click_time = 0
 last_move_time = 0
 selected_hero = None
+dobbelen = True
 
 SCREENW, SCREENH = pygame.display.Info().current_w, pygame.display.Info().current_h
 print(f"Screen Width: {SCREENW}, Screen Height: {SCREENH}")
@@ -218,6 +219,17 @@ def move_selected_hero(dx, dy):
     else:
         print("Geen held geselecteerd")
 
+def beurt_systeem(speler):  
+    global dobbelen
+    spelers = {1: "wit", 2: "blauw", 3: "geel", 4: "rood"}  
+    print(f"Beurt van {spelers[speler]}")
+    
+    worp = input("Voer de dobbelsteenworp in (grijs, zwart, groen, 4, 5, 6): ")
+    
+    volgende_speler = speler + 1 if speler < 4 else 1 
+    
+    dobbelen = True
+    return worp, volgende_speler
 
 running = True
 while running:
@@ -240,13 +252,13 @@ while running:
             print(f"Klik op tile positie: ({cell_x}, {cell_y})")
 
             blue_heroes = find_blue_heroes(layout)
-            print("Posities van de blauwe helden:", blue_heroes) 
+            #print("Posities van de blauwe helden:", blue_heroes) 
             white_heroes = find_white_heroes(layout)
-            print("Posities van de witte helden:", white_heroes) 
+            #print("Posities van de witte helden:", white_heroes) 
             red_heroes = find_red_heroes(layout)
-            print("Posities van de rode helden:", red_heroes) 
+            #print("Posities van de rode helden:", red_heroes) 
             yellow_heroes = find_yellow_heroes(layout)
-            print("Posities van de gele helden:", yellow_heroes) 
+            #print("Posities van de gele helden:", yellow_heroes) 
 
             if (cell_x, cell_y) in blue_heroes:
                 held_kleur = 8
@@ -277,6 +289,16 @@ while running:
     #if keys[pygame.K_d]:
         #move_selected_hero(1, 0)
     
+    pygame.display.update()
+
+    huidige_speler = random.randint(1, 4)
+    
+    while dobbelen:
+        huidige_speler = random.randint(1, 4)
+        worp, huidige_speler = beurt_systeem(huidige_speler)
+        print(f"{huidige_speler} gooide: {worp}")
+        dobbelen = False
+
     move_hero_with_timer()
             
     pygame.display.update()
