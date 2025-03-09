@@ -67,7 +67,7 @@ layout = [
 ]
 
 # alle images inladen en goed formaat geven
-gras_image = pygame.image.load("images/gras3.png")
+gras_image = pygame.image.load("images/grastest1.png")
 gras_image = pygame.transform.scale(gras_image, (CELLW, CELLH))
 
 heg_image = pygame.image.load("images/heg2.png")
@@ -85,13 +85,13 @@ blauw_image = pygame.transform.scale(blauw_image, (CELLW, CELLH))
 wit_image = pygame.image.load("images/witvlaktest.png")
 wit_image = pygame.transform.scale(wit_image, (CELLW, CELLH)) 
 
-geel_image = pygame.image.load("images/geelvlaktest2.png")
+geel_image = pygame.image.load("images/geletegel.png")
 geel_image = pygame.transform.scale(geel_image, (CELLW, CELLH)) 
 
 rood_image = pygame.image.load("images/roodvlaktest.png")
 rood_image = pygame.transform.scale(rood_image, (CELLW, CELLH)) 
 
-heldblauw_image = pygame.image.load("images/blauwvlaktest.png")
+heldblauw_image = pygame.image.load("images/blauwetegel2.png")
 heldblauw_image = pygame.transform.scale(heldblauw_image, (CELLW, CELLH)) 
 
 
