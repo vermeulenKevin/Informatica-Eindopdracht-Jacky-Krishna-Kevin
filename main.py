@@ -18,7 +18,7 @@ COOLDOWN = 0.5
 last_click_time = 0
 last_move_time = 0
 selected_hero = None
-dobbelen = True
+eerste_beurt = True
 
 SCREENW, SCREENH = pygame.display.Info().current_w, pygame.display.Info().current_h
 print(f"Screen Width: {SCREENW}, Screen Height: {SCREENH}")
@@ -114,14 +114,6 @@ def draw_board():
             x = (SCREENW - BOARDW) // 2 + col * CELLW
             y = (SCREENH - BOARDH) // 2 + row * CELLH
 
-            # Bepaal kleur op basis van de waarde in de matrix
-            
-            # Teken de tegel
-            #pygame.draw.rect(screen, color, (x, y, CELLW, CELLH))
-
-            # border om elke tile
-            # pygame.draw.rect(screen, GRAY, (x, y, CELLW, CELLH), 1)
-
             if layout[row][col] == 0:
                 screen.blit (gras_image, (x,y))
             elif layout[row][col] == 1:
@@ -212,23 +204,61 @@ def move_selected_hero(dx, dy):
                 layout[y][x] = 0
                 layout[new_y][new_x] = held_kleur
                 selected_hero = (new_x, new_y)
-                print(f"Hero verplaatst naar: {new_x}, {new_y}")
+                print(f"Held verplaatst naar: {new_x}, {new_y}")
             else:
                 print("Ongelidge zet, de nieuwe tile is geen gras")
     else:
         print("Geen held geselecteerd")
 
-def beurt_systeem(speler):  
-    global dobbelen
-    spelers = {1: "wit", 2: "blauw", 3: "geel", 4: "rood"}  
+
+def worp_muur(speler):
+    print(f"{speler} gooide muur")
+
+def worp_minotaurus(speler):
+    print(f"{speler} gooide minotaurus")
+
+def worp_groen(speler):
+    print(f"{speler} gooide groen")
+
+def worp_vier(speler):
+    print(f"{speler} gooide vier")
+
+def worp_vijf(speler):
+    print(f"{speler} gooide vijf")
+
+def worp_zes(speler):
+    print(f"{speler} gooide zes")
+
+def beurt_systeem(speler):
+    global dobbelsteen, huidige_speler
+    spelers = {
+        1: "wit", 
+        2: "blauw", 
+        3: "geel", 
+        4: "rood"
+    }  
     print(f"Beurt van {spelers[speler]}")
     
-    worp = input("Voer de dobbelsteenworp in (grijs, zwart, groen, 4, 5, 6): ")
+    uitkomst = random.randint(1,6)
+    if uitkomst == 1:
+        worp_muur(speler)
+    elif uitkomst == 2:
+        worp_minotaurus(speler)
+    elif uitkomst == 3:
+        worp_groen(speler)
+    elif uitkomst == 4:
+        worp_vier(speler)
+    elif uitkomst == 5:
+        worp_vijf(speler)
+    elif uitkomst == 6:
+        worp_zes(speler)
     
-    volgende_speler = speler + 1 if speler < 4 else 1 
+    if speler < 4:
+        huidige_speler = speler + 1
+    else:
+        huidige_speler = 1
     
-    dobbelen = True
-    return worp, volgende_speler
+    dobbelsteen = True
 
 running = True
 while running:
@@ -241,62 +271,41 @@ while running:
     draw_board()
 
     if event.type == pygame.MOUSEBUTTONDOWN:
-        current_time = time.time()
-        if current_time - last_click_time > COOLDOWN:
-            last_click_time = current_time
 
-            mouse_pos = pygame.mouse.get_pos()
-            cell_x = (mouse_pos[0] - ((SCREENW - BOARDW) // 2)) // CELLW
-            cell_y = mouse_pos[1] // CELLH 
-            print(f"Klik op tile positie: ({cell_x}, {cell_y})")
+        mouse_pos = pygame.mouse.get_pos()
+        cell_x = (mouse_pos[0] - ((SCREENW - BOARDW) // 2)) // CELLW
+        cell_y = mouse_pos[1] // CELLH             
 
-            blue_heroes = find_blue_heroes(layout)
-            #print("Posities van de blauwe helden:", blue_heroes) 
-            white_heroes = find_white_heroes(layout)
-            #print("Posities van de witte helden:", white_heroes) 
-            red_heroes = find_red_heroes(layout)
-            #print("Posities van de rode helden:", red_heroes) 
-            yellow_heroes = find_yellow_heroes(layout)
-            #print("Posities van de gele helden:", yellow_heroes) 
+        blue_heroes = find_blue_heroes(layout)
+        white_heroes = find_white_heroes(layout)
+        red_heroes = find_red_heroes(layout)
+        yellow_heroes = find_yellow_heroes(layout)
 
-            if (cell_x, cell_y) in blue_heroes:
-                held_kleur = 8
-                selected_hero = (cell_x, cell_y)
-                print(f"Blauwe hero geselecteerd op positie: {selected_hero}")
-            elif (cell_x, cell_y) in white_heroes:
-                held_kleur = 9
-                selected_hero = (cell_x, cell_y)
-                print(f"Witte hero geselecteerd op positie: {selected_hero}")
-            elif (cell_x, cell_y) in red_heroes:
-                held_kleur = 10
-                selected_hero = (cell_x, cell_y)
-                print(f"Rode hero geselecteerd op positie: {selected_hero}")
-            elif (cell_x, cell_y) in yellow_heroes:
-                held_kleur = 11
-                selected_hero = (cell_x, cell_y)
-                print(f"Gele hero geselecteerd op positie: {selected_hero}")
-            else: 
-                selected_hero = None
-
-    #keys = pygame.key.get_pressed()
-    #if keys[pygame.K_a]:
-        #move_selected_hero(-1, 0)
-    #if keys[pygame.K_w]:
-        #move_selected_hero(0, -1)
-    #if keys[pygame.K_s]:
-        #move_selected_hero(0, 1)
-    #if keys[pygame.K_d]:
-        #move_selected_hero(1, 0)
+        if (cell_x, cell_y) in blue_heroes:
+            held_kleur = 8
+            selected_hero = (cell_x, cell_y)
+        elif (cell_x, cell_y) in white_heroes:
+            held_kleur = 9
+            selected_hero = (cell_x, cell_y)
+        elif (cell_x, cell_y) in red_heroes:
+            held_kleur = 10
+            selected_hero = (cell_x, cell_y)
+        elif (cell_x, cell_y) in yellow_heroes:
+            held_kleur = 11
+            selected_hero = (cell_x, cell_y)
+        else: 
+            selected_hero = None
     
     pygame.display.update()
-
-    huidige_speler = random.randint(1, 4)
     
-    while dobbelen:
-        huidige_speler = random.randint(1, 4)
-        worp, huidige_speler = beurt_systeem(huidige_speler)
-        print(f"{huidige_speler} gooide: {worp}")
-        dobbelen = False
+    while eerste_beurt:
+        begin_speler = random.randint(1, 4)
+        begin_speler = beurt_systeem(begin_speler)
+        eerste_beurt = False
+
+    while dobbelsteen:
+        huidige_speler = beurt_systeem(huidige_speler)
+        dobbelsteen = False
 
     move_hero_with_timer()
             

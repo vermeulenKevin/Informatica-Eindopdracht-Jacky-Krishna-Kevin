@@ -6,22 +6,18 @@ pygame.init()
 SCREENW, SCREENH = pygame.display.Info().current_w, pygame.display.Info().current_h
 screen = pygame.display.set_mode((SCREENW, SCREENH), pygame.NOFRAME | pygame.FULLSCREEN)
 
-BLAUW = (0,0,255)
+GREEN = (0,255,0)
 
 running = True
 while running:  
-    screen.fill(BLAUW)
+    screen.fill(GREEN)
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_ESCAPE:
                 running = False
                 pygame.quit()
-                subprocess.run(["python", "main.py"])
-            if event.key == pygame.K_s:
-                running = False
-                pygame.quit()
-                subprocess.run(["python", "spelregels.py"])
+                subprocess.run(["python", "startscherm.py"])
 
 pygame.quit()
 
