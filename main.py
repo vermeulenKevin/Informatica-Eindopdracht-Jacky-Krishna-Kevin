@@ -71,7 +71,7 @@ layout = [
 ]
 
 # alle images inladen en goed formaat geven
-gras_image = pygame.image.load("images/grass2.png")
+gras_image = pygame.image.load("images/grastest1.png")
 gras_image = pygame.transform.scale(gras_image, (CELLW, CELLH))
 
 heg_image = pygame.image.load("images/hedge.png")
