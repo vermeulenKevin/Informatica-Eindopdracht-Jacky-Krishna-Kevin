@@ -51,8 +51,8 @@ layout = [
     [1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 6, 6, 3, 3, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 7, 7, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 7, 7, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 6, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 7, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 4, 4, 5, 5, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
     [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2],
     [1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1],
@@ -67,21 +67,21 @@ layout = [
     [1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
     [1, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 1],
     [1, 11, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12]
 ]
 
 # alle images inladen en goed formaat geven
-gras_image = pygame.image.load("images/grastest1.png")
+gras_image = pygame.image.load("images/gras3.png")
 gras_image = pygame.transform.scale(gras_image, (CELLW, CELLH))
 
-heg_image = pygame.image.load("images/hedge.png")
+heg_image = pygame.image.load("images/heg2.png")
 heg_image = pygame.transform.scale(heg_image, (CELLW, CELLH)) 
 
 muur_image = pygame.image.load("images/muurtest3.png")
 muur_image = pygame.transform.scale(muur_image, (CELLW, CELLH)) 
 
-midden_image = pygame.image.load("images/middentest.png")
-midden_image = pygame.transform.scale(midden_image, (CELLW, CELLH)) 
+midden_image = pygame.image.load("images/leeg_midden.jpeg")
+midden_image = pygame.transform.scale(midden_image, (2*CELLW, 2*CELLH)) 
 
 blauw_image = pygame.image.load("images/nieuwetegelblauw1.png")
 blauw_image = pygame.transform.scale(blauw_image, (CELLW, CELLH)) 
@@ -107,6 +107,9 @@ heldgeel_image = pygame.transform.scale(heldgeel_image, (CELLW, CELLH))
 heldrood_image = pygame.image.load("images/rodepion1.png")
 heldrood_image = pygame.transform.scale(heldrood_image, (CELLW, CELLH)) 
 
+minotaurus_image = pygame.image.load("images/minotaurus_midden.jpeg")
+minotaurus_image = pygame.transform.scale(minotaurus_image, (CELLW, CELLH)) 
+
 def draw_board():
     for row in range(len(layout)):
         for col in range(len(layout[row])):
@@ -129,7 +132,7 @@ def draw_board():
             elif layout[row][col] == 6:
                 screen.blit (wit_image, (x,y))
             elif layout[row][col] == 7:
-                screen.blit (midden_image, (x,y))
+                screen.blit (midden_image, (x-24,y-24))
             elif layout[row][col] == 8:
                 screen.blit (heldblauw_image, (x, y))
             elif layout[row][col] == 9:
@@ -138,6 +141,11 @@ def draw_board():
                 screen.blit (heldgeel_image, (x, y))
             elif layout[row][col] == 11:
                 screen.blit (heldrood_image, (x, y))
+            elif layout[row][col] == 12:
+                global minotaurus_image
+                minotaurus_image = pygame.image.load("images/minotaurus_midden.jpeg")
+                minotaurus_image = pygame.transform.scale(minotaurus_image, ((2*CELLW), (2*CELLH))) 
+                screen.blit (minotaurus_image, (x-408, y-384))
 
 def find_blue_heroes(layout):
     blue_positions = []
@@ -216,6 +224,7 @@ def worp_muur(speler):
 
 def worp_minotaurus(speler):
     print(f"{speler} gooide minotaurus")
+    
 
 def worp_groen(speler):
     print(f"{speler} gooide groen")
