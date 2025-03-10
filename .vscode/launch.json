@@ -3,10 +3,10 @@
   "configurations": [
 
     {
-      "name": "python main.py",
+      "name": "python startscherm.py",
       "type": "debugpy",
       "request": "launch",
-      "program": "main.py",
+      "program": "startscherm.py",
       "console": "integratedTerminal"
     }
   ]
