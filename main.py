@@ -32,7 +32,6 @@ CELLH = BOARDH // 32
 
 print(f"Cell breedte: {CELLW} Cell hoogte: {CELLH}")
 
-pygame.display.set_caption (("Minotaurus")) 
 screen = pygame.display.set_mode((SCREENW, SCREENH), pygame.NOFRAME | pygame.FULLSCREEN)
 
 layout = [
